@@ -1,0 +1,118 @@
+
+
+### Q1. What is RDBMS? Why do industries use RDBMS?
+
+**RDBMS** stands for **Relational Database Management System**. It is a type of database management system (DBMS) that stores data in a structured format, using rows and columns. The data is organized into tables, and relationships between the tables are maintained using primary keys and foreign keys. SQL (Structured Query Language) is typically used for querying and managing data in an RDBMS.
+
+**Why do industries use RDBMS?**
+1. **Data Integrity**: Ensures accuracy and consistency of data through constraints and ACID (Atomicity, Consistency, Isolation, Durability) properties.
+2. **Data Security**: Provides mechanisms to control access to data.
+3. **Efficient Data Management**: Facilitates efficient data retrieval and manipulation using SQL.
+4. **Scalability**: Supports handling of large amounts of data and can scale with organizational growth.
+5. **Data Redundancy Minimization**: Reduces redundancy and improves data organization through normalization.
+6. **Support for Multiple Users**: Allows concurrent access to the database by multiple users without compromising data integrity.
+7. **Backup and Recovery**: Provides tools and methods for data backup and recovery.
+
+### Q2. Explain the relationship data model in depth.
+
+The **Relational Data Model** is a way to structure and query data in a database. It is based on first-order predicate logic and is composed of tables (relations) that contain rows (tuples) and columns (attributes). Key concepts include:
+
+1. **Tables (Relations)**: Collections of data entries. Each table represents an entity type (e.g., Customers, Orders).
+2. **Rows (Tuples)**: Single records in a table. Each row in a table represents a unique instance of an entity.
+3. **Columns (Attributes)**: Characteristics or properties of the entity. Each column represents a specific attribute of the entity (e.g., CustomerName, OrderDate).
+4. **Primary Key**: A unique identifier for each row in a table. No two rows can have the same primary key.
+5. **Foreign Key**: A field in one table that uniquely identifies a row of another table, creating a link between the tables.
+6. **Schema**: The structure of the database defined by tables, columns, and their data types.
+
+### Q3. What is the importance of Relationships in a Database Management System? Explain the types of relationships.
+
+**Importance of Relationships:**
+- **Data Integrity**: Ensures that data is consistent and accurate.
+- **Data Redundancy Reduction**: Minimizes data duplication.
+- **Efficient Data Retrieval**: Allows complex queries that join data from multiple tables.
+- **Logical Data Organization**: Reflects real-world entities and relationships.
+
+**Types of Relationships:**
+1. **One-to-One (1:1)**: Each row in Table A is linked to a single row in Table B and vice versa (e.g., one person has one passport).
+2. **One-to-Many (1:M)**: A row in Table A can be linked to multiple rows in Table B, but a row in Table B is linked to only one row in Table A (e.g., a customer can place multiple orders).
+3. **Many-to-One (M:1)**: Multiple rows in Table A can be linked to a single row in Table B (inverse of One-to-Many).
+4. **Many-to-Many (M:N)**: Rows in Table A can be linked to multiple rows in Table B and vice versa. This is typically managed using a junction table (e.g., students can enroll in multiple courses, and courses can have multiple students).
+
+### Q4. Explain the different types of Keys in RDBMS considering a real-life scenario.
+
+1. **Primary Key**: A unique identifier for each record in a table. 
+   - *Example*: In a `Students` table, `StudentID` is a primary key.
+   
+2. **Foreign Key**: A field in one table that uniquely identifies a row of another table, establishing a relationship between the two tables.
+   - *Example*: In an `Enrollments` table, `StudentID` can be a foreign key linking to `Students(StudentID)`.
+   
+3. **Candidate Key**: An attribute, or a set of attributes, that uniquely identifies a row in a table. A table can have multiple candidate keys.
+   - *Example*: In a `Books` table, both `ISBN` and `LibraryCode` could serve as candidate keys.
+   
+4. **Composite Key**: A primary key composed of multiple columns to uniquely identify a record.
+   - *Example*: In a `CourseEnrollments` table, a composite key could be `(StudentID, CourseID)`.
+   
+5. **Alternate Key**: A candidate key that is not chosen as the primary key.
+   - *Example*: If `ISBN` is the primary key in a `Books` table, `LibraryCode` is an alternate key.
+   
+6. **Surrogate Key**: A system-generated primary key, often an auto-increment integer.
+   - *Example*: An auto-incremented `OrderID` in an `Orders` table.
+
+### Q5. Write a short note on Single Responsibility Principle.
+
+The **Single Responsibility Principle (SRP)** is one of the five SOLID principles of object-oriented design. It states that a class should have only one reason to change, meaning it should have only one job or responsibility. This principle promotes:
+
+- **Cohesion**: Each class has a clear and focused purpose.
+- **Maintainability**: Easier to update or fix bugs in a class without affecting other parts of the system.
+- **Testability**: Classes with a single responsibility are simpler to test.
+- **Reusability**: Classes are more likely to be reused in other contexts if they have a single responsibility.
+
+### Q6. Explain the different types of errors that could arise in a denormalized database.
+
+1. **Update Anomalies**: Inconsistencies that occur when updating data that is duplicated in multiple places.
+   - *Example*: Changing a customer's address requires updating multiple records where the address is stored.
+   
+2. **Insert Anomalies**: Issues that arise when trying to insert data into a table without all necessary information.
+   - *Example*: Unable to add a new product to an inventory table without also having sales data for it.
+   
+3. **Delete Anomalies**: Problems that occur when deleting data, leading to unintended loss of data.
+   - *Example*: Deleting a customer record might also delete valuable sales records if they are stored together.
+   
+4. **Redundancy and Inconsistency**: Storing the same data multiple times can lead to inconsistency.
+   - *Example*: Customer names stored in multiple tables might get out of sync if not updated everywhere.
+
+### Q7. What is normalization and what is the need for normalization?
+
+**Normalization** is the process of organizing data in a database to reduce redundancy and improve data integrity. It involves dividing large tables into smaller, related tables and defining relationships between them. 
+
+**Need for Normalization:**
+- **Eliminates Redundancy**: Reduces duplicate data, saving storage space.
+- **Improves Data Integrity**: Ensures that data is logically stored and prevents anomalies.
+- **Enhances Query Performance**: Smaller tables with clear relationships can improve query efficiency.
+- **Simplifies Maintenance**: Easier to manage and update the database.
+
+### Q8. List out the different levels of Normalization and explain them in detail.
+
+1. **First Normal Form (1NF)**: Ensures that the table has only atomic (indivisible) values and each record is unique.
+   - *Example*: A table with columns `Name`, `Phone` should have each phone number in a separate row if a person has multiple phone numbers.
+   
+2. **Second Normal Form (2NF)**: Achieves 1NF and ensures that all non-key attributes are fully functional dependent on the primary key.
+   - *Example*: In a `Orders` table, `OrderID` should determine `OrderDate`, but `CustomerID` should be stored in a separate `Customers` table.
+   
+3. **Third Normal Form (3NF)**: Achieves 2NF and ensures that all the attributes are not only fully functional dependent on the primary key but also non-transitively dependent.
+   - *Example*: In an `Employees` table, `EmployeeID` should determine `DepartmentID`, and `DepartmentID` should determine `DepartmentName` in a separate `Departments` table.
+   
+4. **Boyce-Codd Normal Form (BCNF)**: A stronger version of 3NF where every determinant is a candidate key.
+   - *Example*: Ensures that there are no non-trivial functional dependencies except for candidate keys.
+   
+5. **Fourth Normal Form (4NF)**: Achieves BCNF and ensures that there are no multi-valued dependencies.
+   - *Example*: In a `Projects` table, if `ProjectID` determines both `EmployeeID` and `SkillID`, then `EmployeeID` and `SkillID` should be separated into different tables.
+   
+6. **Fifth Normal Form (5NF)**: Ensures that there are no join dependencies that are not implied by candidate keys.
+   - *Example*: Decomposes tables to remove redundancy and ensure that all information is represented through primary key relationships.
+
+### Q9. What are joins and why do we need them?
+
+**Joins** are operations in SQL that allow combining rows from two or more tables based on a related column. They are essential for:
+
+- **Combining Data**: Retrieving related data from multiple tables in a single query
